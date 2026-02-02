@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="src/style.css">
+  </head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <img src="assets/common/logo.jpg" alt="Logo" class="logo">
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div id="gallery" class="gallery">
+      <button id="prev" class="arrow arrow-left" aria-label="Previous">◀</button>
+      <div class="viewport">
+        <img id="img-active" src="assets/img/IMG_5687.JPG" alt="Artwork" class="active" loading="lazy">
+      </div>
+      <button id="next" class="arrow arrow-right" aria-label="Next">▶</button>
+    </div>
+    <div id="caption">Loading...</div>
+    <div id="thumbs" class="thumbs" aria-hidden="false"></div>
+    <script src="src/script.js" defer></script>
+  </main>
+  
+</body>
+</html>
