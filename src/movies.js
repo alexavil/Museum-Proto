@@ -30,7 +30,6 @@
   }
 
   function setIndex(i) {
-    document.body.requestFullscreen();
     if (!images || images.length === 0) return;
     current = ((i % images.length) + images.length) % images.length;
     updateUI();
