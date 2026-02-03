@@ -19,5 +19,5 @@ jobs:
     - name: Scan Files in a Folder
       uses: alexavil/folder-scanner@8c280470098ab531e8bdbaf52b78dabff19b5a40
       with:
-          folder: ./assets/img
+          folder: ./assets
           commit_message: Compile asset file list

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="../src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  </head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <img id="logo" src="../assets/common/logo.jpg" alt="Logo" class="logo">
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div id="gallery" class="gallery">
+      <button id="prev" class="arrow arrow-left" aria-label="Previous">◀</button>
+      
+      <div class="viewport">
+        <div id="thumbs-left" class="thumbs thumbs" aria-hidden="false"></div>
+        <img id="img-active" src="../assets/img/IMG_5687.JPG" alt="Artwork" class="active" loading="lazy">
+        <div id="thumbs-right" class="thumbs" aria-hidden="false"></div>
+      </div>
+      
+      <button id="next" class="arrow arrow-right" aria-label="Next">▶</button>
+    </div>
+    <div id="caption"></div>
+    <script src="../src/gallery.js" defer></script>
+  </main>
+  
+</body>
+</html>

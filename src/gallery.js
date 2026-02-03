@@ -1,6 +1,6 @@
 (function() {
-  const manifestUrl = 'assets/img/files.json';
-  const captionUrl = 'src/captions.json';
+  const manifestUrl = '../assets/img/files.json';
+  const captionUrl = '../src/captions.json';
   const imgEl = document.getElementById('img-active');
   const captionEl = document.getElementById('caption');
   const thumbsEl = document.getElementById('thumbs-left');
@@ -28,7 +28,7 @@
 
     if (prev) {
       const tPrev = document.createElement('img');
-      tPrev.src = `assets/img/${prev}`;
+      tPrev.src = `../assets/img/${prev}`;
       tPrev.alt = prev.caption || prev;
       tPrev.loading = 'lazy';
       tPrev.title = 'Previous';
@@ -38,7 +38,7 @@
 
     if (next) {
       const tNext = document.createElement('img');
-      tNext.src = `assets/img/${next}`;
+      tNext.src = `../assets/img/${next}`;
       tNext.alt = next.caption || next;
       tNext.loading = 'lazy';
       tNext.title = 'Next';
@@ -50,7 +50,7 @@
   function updateUI() {
     const item = images[current];
     if (!item) return;
-    const src = `assets/img/${item}`;
+    const src = `../assets/img/${item}`;
     imgEl.src = src;
     fetch(captionUrl)
       .then(r => {
@@ -72,8 +72,8 @@
     // preload neighbors
     const prev = images[(current - 1 + images.length) % images.length];
     const next = images[(current + 1) % images.length];
-    if (prev) preload(`assets/img/${prev}`);
-    if (next) preload(`assets/img/${next}`);
+    if (prev) preload(`../assets/img/${prev}`);
+    if (next) preload(`../assets/img/${next}`);
   }
 
   function setIndex(i) {
@@ -90,6 +90,10 @@
     nextBtn.addEventListener('click', () => {
       setIndex(current + 1)
     });
+
+    document.getElementById("logo").onclick = () => {
+      location.href = "../index.html"
+    }
 
     document.addEventListener('keydown', (ev) => {
       document.body.requestFullscreen();
