@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="src/style-index.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
@@ -16,8 +16,18 @@
   </header>
 
   <main class="site-main">
-    <button id="gallery-button" class="menu-button">View Gallery</button>
-    <button id="movie-button" class="menu-button">View Movies</button>
+    <div id="gallery-container" class="container">
+        <img src="assets/common/science.png" alt="Logo" class="intro container-item">
+        <div id="caption-title" class="container-item">НАУЧНАЯ ЖИЗНЬ ФИЯ</div>
+        <div id="caption" class="container-item"></div>
+        <button id="gallery-button" class="menu-button container-item">View Gallery</button>
+    </div>
+    <div id="movie-container" class="container">
+        <img src="assets/common/movies.png" alt="Logo" class="intro container-item">
+        <div id="caption-title" class="container-item">АТМОСФЕРА ФИЯ</div>
+        <div id="caption" class="container-item"></div>
+        <button id="movie-button" class="menu-button container-item">View Movies</button>
+    </div>
     <script src="src/index.js" defer></script>
   </main>
   

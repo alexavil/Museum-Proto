@@ -1,56 +1,18 @@
 (function() {
-  const manifestUrl = '../assets/img/files.json';
+  const manifestUrl = '../assets/vid/files.json';
   const captionUrl = '../src/captions.json';
-  const imgEl = document.getElementById('img-active');
+  const imgEl = document.getElementById('vid-active');
   const captionEl = document.getElementById('caption');
-  const thumbsEl = document.getElementById('thumbs-left');
-  const thumbsEr = document.getElementById('thumbs-right');
   const prevBtn = document.getElementById('prev');
   const nextBtn = document.getElementById('next');
 
   let images = [];
   let current = 0;
 
-  function preload(src) {
-    const i = new Image();
-    i.src = src;
-  }
-
-  function renderThumbs() {
-    if (!thumbsEl || !thumbsEr) return;
-    thumbsEl.innerHTML = '';
-    thumbsEr.innerHTML = '';
-    if (images.length <= 1) return;
-    const prevIdx = (current - 1 + images.length) % images.length;
-    const nextIdx = (current + 1) % images.length;
-    const prev = images[prevIdx];
-    const next = images[nextIdx];
-
-    if (prev) {
-      const tPrev = document.createElement('img');
-      tPrev.src = `../assets/img/${prev}`;
-      tPrev.alt = prev.caption || prev;
-      tPrev.loading = 'lazy';
-      tPrev.title = 'Previous';
-      tPrev.addEventListener('click', () => setIndex(prevIdx));
-      thumbsEl.appendChild(tPrev);
-    }
-
-    if (next) {
-      const tNext = document.createElement('img');
-      tNext.src = `../assets/img/${next}`;
-      tNext.alt = next.caption || next;
-      tNext.loading = 'lazy';
-      tNext.title = 'Next';
-      tNext.addEventListener('click', () => setIndex(nextIdx));
-      thumbsEr.appendChild(tNext);
-    }
-  }
-
   function updateUI() {
     const item = images[current];
     if (!item) return;
-    const src = `../assets/img/${item}`;
+    const src = `../assets/vid/${item}`;
     imgEl.src = src;
     fetch(captionUrl)
       .then(r => {
@@ -65,15 +27,6 @@
       console.error('Error loading captions:', err);
       showFallback();
     });
-
-    // show only prev/next thumbnails
-    renderThumbs();
-
-    // preload neighbors
-    const prev = images[(current - 1 + images.length) % images.length];
-    const next = images[(current + 1) % images.length];
-    if (prev) preload(`../assets/img/${prev}`);
-    if (next) preload(`../assets/img/${next}`);
   }
 
   function setIndex(i) {
