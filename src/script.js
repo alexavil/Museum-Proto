@@ -1,5 +1,6 @@
 (function() {
   const manifestUrl = 'assets/img/files.json';
+  const captionUrl = 'src/captions.json';
   const imgEl = document.getElementById('img-active');
   const captionEl = document.getElementById('caption');
   const thumbsEl = document.getElementById('thumbs');
@@ -58,8 +59,8 @@
     // preload neighbors
     const prev = images[(current - 1 + images.length) % images.length];
     const next = images[(current + 1) % images.length];
-    if (prev) preload(`assets/img/${prev.file}`);
-    if (next) preload(`assets/img/${next.file}`);
+    if (prev) preload(`assets/img/${prev}`);
+    if (next) preload(`assets/img/${next}`);
   }
 
   function setIndex(i) {
