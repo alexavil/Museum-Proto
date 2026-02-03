@@ -3,7 +3,8 @@
   const captionUrl = 'src/captions.json';
   const imgEl = document.getElementById('img-active');
   const captionEl = document.getElementById('caption');
-  const thumbsEl = document.getElementById('thumbs');
+  const thumbsEl = document.getElementById('thumbs-left');
+  const thumbsEr = document.getElementById('thumbs-right');
   const prevBtn = document.getElementById('prev');
   const nextBtn = document.getElementById('next');
 
@@ -16,8 +17,9 @@
   }
 
   function renderThumbs() {
-    if (!thumbsEl) return;
+    if (!thumbsEl || !thumbsEr) return;
     thumbsEl.innerHTML = '';
+    thumbsEr.innerHTML = '';
     if (images.length <= 1) return;
     const prevIdx = (current - 1 + images.length) % images.length;
     const nextIdx = (current + 1) % images.length;
@@ -41,7 +43,7 @@
       tNext.loading = 'lazy';
       tNext.title = 'Next';
       tNext.addEventListener('click', () => setIndex(nextIdx));
-      thumbsEl.appendChild(tNext);
+      thumbsEr.appendChild(tNext);
     }
   }
 
@@ -50,8 +52,19 @@
     if (!item) return;
     const src = `assets/img/${item}`;
     imgEl.src = src;
-    imgEl.alt = item.caption || item;
-    captionEl.textContent = item.caption || item;
+    fetch(captionUrl)
+      .then(r => {
+      if (!r.ok) throw new Error('Failed to load manifest');
+      return r.json();
+    })
+    .then(list => {
+      imgEl.alt = list.captions[item.split(" ")[0]];
+      captionEl.textContent = list.captions[item.split(" ")[0]];
+    })
+    .catch(err => {
+      console.error('Error loading captions:', err);
+      showFallback();
+    });
 
     // show only prev/next thumbnails
     renderThumbs();
@@ -64,16 +77,22 @@
   }
 
   function setIndex(i) {
+    document.body.requestFullscreen();
     if (!images || images.length === 0) return;
     current = ((i % images.length) + images.length) % images.length;
     updateUI();
   }
 
   function bindControls() {
-    prevBtn.addEventListener('click', () => setIndex(current - 1));
-    nextBtn.addEventListener('click', () => setIndex(current + 1));
+    prevBtn.addEventListener('click', () => {
+      setIndex(current - 1);
+    });
+    nextBtn.addEventListener('click', () => {
+      setIndex(current + 1)
+    });
 
     document.addEventListener('keydown', (ev) => {
+      document.body.requestFullscreen();
       if (ev.key === 'ArrowLeft') setIndex(current - 1);
       if (ev.key === 'ArrowRight') setIndex(current + 1);
     });
@@ -82,6 +101,7 @@
     let startX = null;
     imgEl.addEventListener('touchstart', (e) => { startX = e.changedTouches[0].clientX; });
     imgEl.addEventListener('touchend', (e) => {
+      document.body.requestFullscreen();
       if (startX === null) return;
       const dx = e.changedTouches[0].clientX - startX;
       if (Math.abs(dx) > 40) setIndex(current + (dx > 0 ? -1 : 1));
