@@ -1,5 +1,5 @@
 (function() {
-  const manifestUrl = 'assets/img/images.json';
+  const manifestUrl = 'assets/img/files.json';
   const imgEl = document.getElementById('img-active');
   const captionEl = document.getElementById('caption');
   const thumbsEl = document.getElementById('thumbs');
@@ -25,8 +25,8 @@
 
     if (prev) {
       const tPrev = document.createElement('img');
-      tPrev.src = `assets/img/${prev.file}`;
-      tPrev.alt = prev.caption || prev.file;
+      tPrev.src = `assets/img/${prev}`;
+      tPrev.alt = prev.caption || prev;
       tPrev.loading = 'lazy';
       tPrev.title = 'Previous';
       tPrev.addEventListener('click', () => setIndex(prevIdx));
@@ -35,8 +35,8 @@
 
     if (next) {
       const tNext = document.createElement('img');
-      tNext.src = `assets/img/${next.file}`;
-      tNext.alt = next.caption || next.file;
+      tNext.src = `assets/img/${next}`;
+      tNext.alt = next.caption || next;
       tNext.loading = 'lazy';
       tNext.title = 'Next';
       tNext.addEventListener('click', () => setIndex(nextIdx));
@@ -47,10 +47,10 @@
   function updateUI() {
     const item = images[current];
     if (!item) return;
-    const src = `assets/img/${item.file}`;
+    const src = `assets/img/${item}`;
     imgEl.src = src;
-    imgEl.alt = item.caption || item.file;
-    captionEl.textContent = item.caption || item.file;
+    imgEl.alt = item.caption || item;
+    captionEl.textContent = item.caption || item;
 
     // show only prev/next thumbnails
     renderThumbs();
@@ -99,7 +99,7 @@
       return r.json();
     })
     .then(list => {
-      images = Array.isArray(list) ? list : [];
+      images = Array.isArray(list.files) ? list.files : [];
       if (images.length === 0) return showFallback();
       setIndex(0);
       bindControls();
