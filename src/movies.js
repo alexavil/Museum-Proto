@@ -20,9 +20,7 @@
       return r.json();
     })
     .then(list => {
-      console.log(item.split(".")[0])
-      console.log(list.captions[item.split(".")[0]])
-      captionEl.textContent = list.captions[item.split(".")[0]];
+      captionEl.textContent = list.captions[item.split("_")[0]];
     })
     .catch(err => {
       console.error('Error loading captions:', err);
