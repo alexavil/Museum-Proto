@@ -1,6 +1,6 @@
 (function() {
   const manifestUrl = '../assets/img/files.json';
-  const captionUrl = '../src/captions.json';
+  const captionUrl = '../assets/common/captions.json';
   const imgEl = document.getElementById('img-active');
   const captionEl = document.getElementById('caption');
   const thumbsEl = document.getElementById('thumbs-left');
@@ -58,8 +58,8 @@
       return r.json();
     })
     .then(list => {
-      imgEl.alt = list.captions[item.split(" ")[0]];
-      captionEl.textContent = list.captions[item.split(" ")[0]];
+      imgEl.alt = list.captions[item.split("_")[0]];
+      captionEl.textContent = list.captions[item.split("_")[0]];
     })
     .catch(err => {
       console.error('Error loading captions:', err);

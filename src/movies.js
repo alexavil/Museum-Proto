@@ -1,6 +1,6 @@
 (function() {
   const manifestUrl = '../assets/vid/files.json';
-  const captionUrl = '../src/captions.json';
+  const captionUrl = '../assets/common/captions.json';
   const imgEl = document.getElementById('vid-active');
   const captionEl = document.getElementById('caption');
   const prevBtn = document.getElementById('prev');
@@ -20,8 +20,9 @@
       return r.json();
     })
     .then(list => {
-      imgEl.alt = list.captions[item.split(" ")[0]];
-      captionEl.textContent = list.captions[item.split(" ")[0]];
+      console.log(item.split(".")[0])
+      console.log(list.captions[item.split(".")[0]])
+      captionEl.textContent = list.captions[item.split(".")[0]];
     })
     .catch(err => {
       console.error('Error loading captions:', err);
