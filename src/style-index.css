@@ -3,19 +3,27 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden; /* avoid horizontal scroll on small screens [web:3] */
   user-select: none;
   margin: 0;
-  background-image: linear-gradient(to right, rgba(0,0,0, 0.7) 0 100%), url("../assets/common/bg_main.jpg");
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.7) 0 100%),
+    url("../assets/common/bg_main.jpg");
   background-size: cover;
-    font-family: "Oswald", sans-serif;
-    font-size: 3vmin;
-    color: white;
+  background-position: center;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(14px, 3vmin, 20px); /* keeps text readable on mobile [web:2] */
+  color: white;
 }
+
 ::backdrop {
-  background-image: linear-gradient(to right, rgba(0,0,0, 0.7) 0 100%), url("../assets/common/bg_main.jpg");
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.7) 0 100%),
+    url("../assets/common/bg_main.jpg");
   background-size: cover;
+  background-position: center;
 }
+
 main {
   display: block;
   margin: auto;
@@ -28,72 +36,149 @@ main {
   max-width: 1100px;
   padding: 20px;
   padding-top: calc(64px + 20px);
+  box-sizing: border-box;
 }
+
 .site-header {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 64px;
-    padding: 8px 16px;
-    align-items: center;
-    justify-content: center;
-    background: #33604c;
-    z-index: 1000;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  padding: 8px 16px;
+  align-items: center;
+  justify-content: center;
+  background: #33604c;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
+
 .logo-wrap {
-    display: flex;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
+
 .logo {
-    max-height: 72px;
-    height: auto;
-    width: auto;
-    object-fit: contain;
-    display: block;
+  max-height: 72px;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
-@media (max-width: 480px) {
-  .site-header { height: 56px; padding: 6px 12px; }
-  .logo { max-height: 40px; }
-  .intro { max-height: 40px; }
-}
-.container-item {
-    display: inline-block;
-    width: 100%;
-    padding: 1vmin;
-}
-.intro {
-    max-width: 25vw;
-    max-height: 25vh;
-    height: auto;
-    width: auto;
-    object-fit: contain;
-}
-.qr {
-    max-width: 17vw;
-    max-height: 17vh;
-    height: auto;
-    width: auto;
-    object-fit: contain;
-}
-#caption-title {
-    font-size: 5vmin;
-}
-#caption {
-    min-height: 20vh;
-    height: auto;
-    width: auto;
-    object-fit: contain;  
-}
+
+/* Main layout: two columns on larger screens, one on mobile */
 #main-container {
-    column-count: 2;
+  column-count: 2;
+  column-gap: 2rem;
 }
+
+/* Generic container item */
+.container-item {
+  display: inline-block;
+  width: 100%;
+  padding: 1vmin;
+  box-sizing: border-box;
+}
+
+/* Images: keep aspect ratio and prevent overflow [web:3][web:6] */
+.intro,
+.qr {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.intro {
+  max-width: 25vw;
+  max-height: 25vh;
+}
+
+.qr {
+  max-width: 20vw;
+  max-height: 20vh;
+}
+
+#caption-title {
+  font-size: clamp(20px, 5vmin, 32px);
+}
+
+#caption {
+  min-height: 20vh;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  object-fit: contain;
+}
+
 button {
-    background: #33604c;
-    font-family: "Oswald", sans-serif;
-    font-size: xx-large;
-    color: white;
+  background: #33604c;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.25em;
+  color: white;
+  border: none;
+  padding: 0.5em 1.5em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ---------- Responsive tweaks ---------- */
+
+@media (max-width: 768px) {
+  body {
+    font-size: clamp(14px, 4vmin, 18px); /* slightly larger on phones [web:2] */
+  }
+
+  .site-header {
+    height: 56px;
+    padding: 6px 12px;
+  }
+
+  .logo {
+    max-height: 40px;
+  }
+
+  main {
+    padding: 16px;
+    padding-top: calc(56px + 16px);
+  }
+
+  /* Single column on mobile for better fit [web:10] */
+  #main-container {
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  .intro,
+  .qr {
+    max-width: 70vw;
+    max-height: none;
+  }
+
+  #caption-title {
+    font-size: clamp(18px, 6vmin, 26px);
+  }
+
+  #caption {
+    min-height: auto;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Slight extra tightening for very small screens */
+  main {
+    padding: 12px;
+    padding-top: calc(56px + 12px);
+  }
+
+  .intro,
+  .qr {
+    max-width: 80vw;
+  }
 }
