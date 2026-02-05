@@ -3,14 +3,19 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden; /* prevent horizontal scroll on small screens [web:15] */
   user-select: none;
   margin: 0;
-  background-image: linear-gradient(to right, rgba(0,0,0, 0.7) 0 100%), url("../assets/common/bg.jpg");
+  background-image: linear-gradient(
+      to right,
+      rgba(0,0,0, 0.7) 0 100%
+    ),
+    url("../assets/common/bg.jpg");
   background-size: cover;
-    font-family: "Oswald", sans-serif;
-    font-size: large;
-    color: white;
+  background-position: center;
+  font-family: "Oswald", sans-serif;
+  font-size: large;
+  color: white;
 }
 ::backdrop {
   background-image: linear-gradient(to right, rgba(0,0,0, 0.7) 0 100%), url("../assets/common/bg.jpg");
