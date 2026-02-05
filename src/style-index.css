@@ -3,6 +3,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  overflow: hidden;
   user-select: none;
   margin: 0;
   background-image: linear-gradient(to right, rgba(0,0,0, 0.7) 0 100%), url("../assets/common/bg_main.jpg");
@@ -57,6 +58,7 @@ main {
 @media (max-width: 480px) {
   .site-header { height: 56px; padding: 6px 12px; }
   .logo { max-height: 40px; }
+  .intro { max-height: 40px; }
 }
 .container-item {
     display: inline-block;
