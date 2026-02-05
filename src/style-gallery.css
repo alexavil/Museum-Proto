@@ -120,6 +120,11 @@ main {
     margin: 12px auto 0 auto;
     font-size: 2.3vh;
 }
+@media (max-width: 720px) {
+  main { padding-top: calc(56px + 16px); }
+  #caption { font-size: 1vh; }
+}
 @media (max-width: 480px) {
   main { padding-top: calc(56px + 16px); }
+  #caption { font-size: 1vh; }
 }
