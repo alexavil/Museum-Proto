@@ -1,9 +1,11 @@
 body {
   display: flex;
+  flex-direction: column; /* Ensures stacking for safety on smaller screens */
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Avoids vertical clipping */
   min-height: 100vh;
   overflow-x: hidden;
+  overflow-y: auto; /* Allow vertical scrolling if needed */
   user-select: none;
   margin: 0;
   background-image: linear-gradient(to right, rgba(0,0,0, 0.7) 0 100%), url("../assets/common/bg.jpg");
@@ -31,8 +33,10 @@ main {
   width: 100%;
   max-width: 1100px;
   padding: 20px;
-  padding-top: calc(64px + 20px);
+  padding-top: calc(64px + 24px); /* Increased spacing under header */
+  padding-bottom: 40px; /* Ensure bottom margin */
   box-sizing: border-box;
+  overflow-wrap: break-word;
 }
 
 .site-header {
@@ -70,6 +74,7 @@ main {
   justify-content: center;
   gap: 20px;
   flex-wrap: nowrap;
+  margin-bottom: 20px; /* Add spacing below gallery */
 }
 
 #gallery .viewport {
@@ -140,24 +145,32 @@ main {
   display: flex;
   position: relative;
   justify-content: center;
-  max-width: 90vw;
-  margin: 12px auto 0 auto;
+  align-items: center;
+  max-width: 90vw;             /* dynamic width with padding margin */
+  margin: 16px auto 24px auto; /* added even spacing top/bottom */
   text-align: center;
   box-sizing: border-box;
-  font-size: 3vmin;
-  padding: 0 10px;
+  padding: 0 12px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  font-size: clamp(14px, 3vw, 22px);  /* scales smoothly between small and large screens */
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
 }
+
 
 /* --- Mobile adjustments --- */
 @media (max-width: 768px) {
   body {
     font-size: medium;
-    flex-direction: column;
   }
 
   main {
     padding: 16px;
-    padding-top: calc(56px + 16px);
+    padding-top: calc(56px + 24px);
+    padding-bottom: 60px; /* More breathing room for text */
   }
 
   .site-header {
@@ -178,7 +191,7 @@ main {
     min-width: 85vw;
     min-height: auto;
     max-width: 85vw;
-    max-height: 60vh;
+    max-height: 55vh;
   }
 
   .arrow {
@@ -191,7 +204,7 @@ main {
   }
 
   .thumbs img {
-    width: 22vw; /* scale relative to viewport */
+    width: 22vw;
     height: auto;
   }
 
@@ -211,10 +224,11 @@ main {
 
   #img-active {
     max-width: 90vw;
-    max-height: 55vh;
+    max-height: 50vh;
   }
 
   #caption {
     font-size: 4.5vmin;
+    margin-bottom: 24px;
   }
 }
