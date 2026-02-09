@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v3
       
     - name: Scan Files in a Folder
-      uses: alexavil/folder-scanner@daa7450cab1430f5ee4ed0f306b0e6ce0860da0d
+      uses: alexavil/folder-scanner@9b8cae1c118f13bf04b873a6e0262abf9e9675a0
       with:
-          folder: ./assets
+          folder: ./assets/img
           json_name: assets.json
