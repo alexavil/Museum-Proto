@@ -16,8 +16,14 @@ jobs:
     - name: Clone the repository
       uses: actions/checkout@v3
       
-    - name: Scan Files in a Folder
+    - name: Scan Images Folder
       uses: alexavil/folder-scanner@9b8cae1c118f13bf04b873a6e0262abf9e9675a0
       with:
           folder: ./assets/img
-          json_name: assets.json
+          json_name: files.json
+
+    - name: Scan Videos Folder
+      uses: alexavil/folder-scanner@9b8cae1c118f13bf04b873a6e0262abf9e9675a0
+      with:
+          folder: ./assets/vid
+          json_name: files.json
