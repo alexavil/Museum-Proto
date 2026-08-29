@@ -29,7 +29,7 @@
     if (prev) {
       const tPrev = document.createElement('img');
       tPrev.src = `../assets/img/${prev}`;
-      tPrev.alt = prev.caption || prev;
+      tPrev.alt = prev;
       tPrev.loading = 'lazy';
       tPrev.title = 'Previous';
       tPrev.addEventListener('click', () => setIndex(prevIdx));
@@ -39,7 +39,7 @@
     if (next) {
       const tNext = document.createElement('img');
       tNext.src = `../assets/img/${next}`;
-      tNext.alt = next.caption || next;
+      tNext.alt = next;
       tNext.loading = 'lazy';
       tNext.title = 'Next';
       tNext.addEventListener('click', () => setIndex(nextIdx));

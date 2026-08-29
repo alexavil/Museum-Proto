@@ -68,10 +68,14 @@ main {
   display: block;
 }
 
-/* Main layout: two columns on larger screens, one on mobile */
+/* Main layout: two columns on larger screens, one on mobile.
+   Grid (not CSS multi-column) so each .container's content — image, title,
+   caption, button — always stays together instead of splitting across columns. */
 #main-container {
-  column-count: 2;
-  column-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: start;
 }
 
 /* Generic container item */
@@ -83,21 +87,12 @@ main {
 }
 
 /* Images: keep aspect ratio and prevent overflow [web:3][web:6] */
-.intro,
-.qr {
+.intro {
   max-width: 100%;
   height: auto;
   object-fit: contain;
-}
-
-.intro {
   max-width: 25vw;
   max-height: 25vh;
-}
-
-.qr {
-  max-width: 20vw;
-  max-height: 20vh;
 }
 
 #caption-title {
@@ -146,12 +141,11 @@ button {
 
   /* Single column on mobile for better fit [web:10] */
   #main-container {
-    column-count: 1;
-    column-gap: 0;
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
-  .intro,
-  .qr {
+  .intro {
     max-width: 70vw;
     max-height: none;
   }
@@ -177,8 +171,7 @@ button {
     padding-top: calc(56px + 12px);
   }
 
-  .intro,
-  .qr {
+  .intro {
     max-width: 80vw;
   }
 }
